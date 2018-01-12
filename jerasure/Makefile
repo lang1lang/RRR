@@ -4,7 +4,7 @@
 # Optimization method for XOR-based erasure code
 #
 # Author: lyfdamon
-# Since: 2017/12/27
+# Since: 2017/12/26
 #
 #
 
