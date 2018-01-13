@@ -52,14 +52,14 @@ RRR/
 ##  Checking out the source
 
 You can clone from github with:                                                                                                      
-    git clone git@github.com:lyfdamon/RRR                                                                                               
+git clone git@github.com:lyfdamon/RRR                                                                                               
 or, if you are not a github user,                                                                                                    
-    git clone git://github.com/lyfdamon/RRR                                                                                             
+git clone git://github.com/lyfdamon/RRR                                                                                             
     
 ## Building RRR
 
-    cd RRR                                                                                                                              
-    make                                                                                                                                
+cd RRR                                                                                                                              
+make                                                                                                                                
 
 ## Running RRR
 
