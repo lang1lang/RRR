@@ -5,7 +5,7 @@ Author: lyfdamon
 ------------------------------------------------------------------------------------------------------------------------------------------
 ## The file directory tree of the platform
 RRR
-|---- algorithm
+|---- algorithm                                                                                                                         
 |   |-- climb_search
 |   |   |-- include
 |   |   |   |-- climb_search.h
