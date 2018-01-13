@@ -51,9 +51,10 @@ RRR/
 
 ##  Checking out the source
 
-You can clone from github with:                                                                                                             git clone git@github.com:lyfdamon/RRR                                                                                               
-or, if you are not a github user,                                                                                                       
-    git clone git://github.com/lyfdamon/RRR                                                                                             
+You can clone from github with:                                                                                                      
+git clone git@github.com:lyfdamon/RRR                                                                                               
+or, if you are not a github user,                                                                                                    
+git clone git://github.com/lyfdamon/RRR                                                                                             
     
 ## Building RRR
 
