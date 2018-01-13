@@ -47,4 +47,25 @@ RRR/
 │       └── reed_sol.cpp                                                                                                                
 ├── Makefile                                                                                                                            
 ├── Makefile.build                                                                                                                      
-└── README.md                                                                                                                           
+└── README.md                                                                                                                          
+
+##  Checking out the source
+
+You can clone from github with:
+    git clone git@github.com:lyfdamon/RRR
+or, if you are not a github user,
+    git clone git://github.com/lyfdamon/RRR
+
+## Building RRR
+
+    cd RRR
+    make
+   
+## Running RRR
+
+To run climb_search:
+    ./bin/climb_test
+To run enumeration_search:
+    ./bin/enumeration_test
+To run sa_search:
+    ./bin/sa_test 
