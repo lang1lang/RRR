@@ -4,7 +4,6 @@ Author: lyfdamon
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 ## The file directory tree of the platform
-<<<<<<< HEAD
 
 RRR/
 ├── algorithm
@@ -48,49 +47,4 @@ RRR/
 │       └── reed_sol.cpp
 ├── Makefile
 ├── Makefile.build
-└── README.md																							    	
-=======
-RRR                                                                                                                                     
-|---- algorithm                                                                                                                         
-|   |-- climb_search                                                                                                                    
-|   |   |-- include                                                                                                                     
-|   |   |   |-- climb_search.h                                                                                                          
-|   |   |-- Makefile                                                                                                                    
-|   |   |-- src                                                                                                                         
-|   |       |-- climb_search.cpp                                                                                                        
-|   |-- enumeration_search                                                                                                              
-|   |   |-- include                                                                                                                     
-|   |   |   |-- enumeration_search.h                                                                                                    
-|   |   |-- Makefile                                                                                                                    
-|   |   |-- src                                                                                                                         
-|   |       |-- enumeration_search.cpp                                                                                                  
-|   |-- Makefile                                                                                                                        
-|   |-- sa_search                                                                                                                       
-|       |-- include                                                                                                                     
-|       |   |-- sa_search.h                                                                                                             
-|       |-- Makefile                                                                                                                    
-|       |-- src                                                                                                                         
-|           |-- sa_search.cpp                                                                                                           
-|-- Example                                                                                                                             
-|   |-- climb_test.cpp                                                                                                                  
-|   |-- enumeration_test.cpp                                                                                                            
-|   |-- Makefile                                                                                                                        
-|   |-- sa_test.cpp                                                                                                                     
-|-- jerasure                                                                                                                            
-|   |-- include                                                                                                                         
-|   |   |-- cauchy.h                                                                                                                    
-|   |   |-- galois.h                                                                                                                    
-|   |   |-- jerasure.h                                                                                                                  
-|   |   |-- liberation.h                                                                                                                
-|   |   |-- reed_sol.h                                                                                                                  
-|   |-- Makefile
-|   |-- src
-|       |-- cauchy.cpp
-|       |-- galois.cpp
-|       |-- jerasure.cpp
-|       |-- liberation.cpp
-|       |-- reed_sol.cpp
-|-- Makefile
-|-- Makefile.build
-|-- README.md
->>>>>>> b641877f58b123b674b73e78ac2fa13ec2de56eb
+└── README.md
