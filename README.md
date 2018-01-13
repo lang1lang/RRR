@@ -4,39 +4,39 @@ Author: lyfdamon
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 ## The file directory tree of the platform
-RRR
+RRR                                                                                                                                     
 |---- algorithm                                                                                                                         
-|   |-- climb_search
-|   |   |-- include
-|   |   |   |-- climb_search.h
-|   |   |-- Makefile
-|   |   |-- src
-|   |       |-- climb_search.cpp
-|   |-- enumeration_search
-|   |   |-- include
-|   |   |   |-- enumeration_search.h
-|   |   |-- Makefile
-|   |   |-- src
-|   |       |-- enumeration_search.cpp
-|   |-- Makefile
-|   |-- sa_search
-|       |-- include
-|       |   |-- sa_search.h
-|       |-- Makefile
-|       |-- src
-|           |-- sa_search.cpp
-|-- Example
-|   |-- climb_test.cpp
-|   |-- enumeration_test.cpp
-|   |-- Makefile
-|   |-- sa_test.cpp
-|-- jerasure
-|   |-- include
-|   |   |-- cauchy.h
-|   |   |-- galois.h
-|   |   |-- jerasure.h
-|   |   |-- liberation.h
-|   |   |-- reed_sol.h
+|   |-- climb_search                                                                                                                    
+|   |   |-- include                                                                                                                     
+|   |   |   |-- climb_search.h                                                                                                          
+|   |   |-- Makefile                                                                                                                    
+|   |   |-- src                                                                                                                         
+|   |       |-- climb_search.cpp                                                                                                        
+|   |-- enumeration_search                                                                                                              
+|   |   |-- include                                                                                                                     
+|   |   |   |-- enumeration_search.h                                                                                                    
+|   |   |-- Makefile                                                                                                                    
+|   |   |-- src                                                                                                                         
+|   |       |-- enumeration_search.cpp                                                                                                  
+|   |-- Makefile                                                                                                                        
+|   |-- sa_search                                                                                                                       
+|       |-- include                                                                                                                     
+|       |   |-- sa_search.h                                                                                                             
+|       |-- Makefile                                                                                                                    
+|       |-- src                                                                                                                         
+|           |-- sa_search.cpp                                                                                                           
+|-- Example                                                                                                                             
+|   |-- climb_test.cpp                                                                                                                  
+|   |-- enumeration_test.cpp                                                                                                            
+|   |-- Makefile                                                                                                                        
+|   |-- sa_test.cpp                                                                                                                     
+|-- jerasure                                                                                                                            
+|   |-- include                                                                                                                         
+|   |   |-- cauchy.h                                                                                                                    
+|   |   |-- galois.h                                                                                                                    
+|   |   |-- jerasure.h                                                                                                                  
+|   |   |-- liberation.h                                                                                                                
+|   |   |-- reed_sol.h                                                                                                                  
 |   |-- Makefile
 |   |-- src
 |       |-- cauchy.cpp
