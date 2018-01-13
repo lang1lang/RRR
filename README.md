@@ -58,8 +58,8 @@ or, if you are not a github user,
     
 ## Building RRR
 
-    cd RRR                                                                                                                              
-    make                                                                                                                                
+cd RRR                                                                                                                              
+make                                                                                                                                
 
 ## Running RRR
 
