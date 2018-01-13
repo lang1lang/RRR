@@ -60,7 +60,7 @@ or, if you are not a github user,
 
     cd RRR                                                                                                                              
     make                                                                                                                                
-   
+
 ## Running RRR
 
 To run climb_search:                                                                                                                    
