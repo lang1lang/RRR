@@ -15,6 +15,7 @@ TOP_PATH = $(shell pwd)
 JERASURE_DIR  = $(TOP_PATH)/jerasure
 ALGORITHM_DIR = $(TOP_PATH)/algorithm
 EXAMPLE_DIR   = $(TOP_PATH)/Example
+FILEOUTPUT    = $(TOP_PATH)/FileOutput
 
 BIN_DIR       = $(TOP_PATH)/bin
 ifneq ($(BIN_DIR),)
@@ -22,7 +23,7 @@ $(shell mkdir -p $(BIN_DIR))
 endif
 
 TARGET      =  test
-SUBDIRS     =  $(JERASURE_DIR) $(ALGORITHM_DIR) $(EXAMPLE_DIR)
+SUBDIRS     =  $(JERASURE_DIR) $(ALGORITHM_DIR) $(EXAMPLE_DIR) $(FILEOUTPUT)
 AFTERDIRS   =  $(EXAMPLE_DIR)
 OBJECTS     =
 
@@ -32,9 +33,9 @@ OBJECTS     =
 default: all
 
 all:subdirs $(OBJECTS)
-	${CC} $(EXAMPLE_DIR)/obj/climb_test.o $(JERASURE_DIR)/obj/*.o $(ALGORITHM_DIR)/climb_search/obj/*.o $(LDFLAGS) -o ${BIN_DIR}/climb_test
-	${CC} $(EXAMPLE_DIR)/obj/sa_test.o $(JERASURE_DIR)/obj/*.o $(ALGORITHM_DIR)/sa_search/obj/*.o $(LDFLAGS) -o ${BIN_DIR}/sa_test
-	${CC} $(EXAMPLE_DIR)/obj/enumeration_test.o $(JERASURE_DIR)/obj/*.o $(ALGORITHM_DIR)/enumeration_search/obj/*.o $(LDFLAGS) -o ${BIN_DIR}/enumeration_test
+	${CC} $(EXAMPLE_DIR)/obj/climb_test.o $(JERASURE_DIR)/obj/*.o $(ALGORITHM_DIR)/climb_search/obj/*.o $(FILEOUTPUT)/obj/*.o $(LDFLAGS) -o ${BIN_DIR}/climb_test
+	${CC} $(EXAMPLE_DIR)/obj/sa_test.o $(JERASURE_DIR)/obj/*.o $(ALGORITHM_DIR)/sa_search/obj/*.o $(FILEOUTPUT)/obj/*.o $(LDFLAGS) -o ${BIN_DIR}/sa_test
+	${CC} $(EXAMPLE_DIR)/obj/enumeration_test.o $(JERASURE_DIR)/obj/*.o $(ALGORITHM_DIR)/enumeration_search/obj/*.o $(FILEOUTPUT)/obj/*.o $(LDFLAGS) -o ${BIN_DIR}/enumeration_test
 # Help message
 help:
 	@echo "optimization method for XOR-code"
