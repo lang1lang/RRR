@@ -35,8 +35,8 @@ void init_final_decoding_matrix(int k,int m,int w) {
 
 void enumeration_int2bin(long long integer, int *binary, int array_len) {
 	int k = 0, n = 0;
-	int remain;
-	int *temp = new int[array_len];
+	long long remain;
+	long long *temp = new long long[array_len];
 	do {
 		remain = integer % 2;
 		integer = integer / 2;
@@ -180,6 +180,7 @@ void enumeration_decoding_equations(int k, int m, int w, int failed_disk_id, int
 	}
 	delete decoding_equations;
 	delete[] F;
+	delete[] binaryArray;
 }
 
 void calculate_node_edge_numbers(int k, int m, int w) {
@@ -371,17 +372,14 @@ void find_rows(GraphAdjList Gp,int k,int m,int w, Pathmatrix *P, ShortPathTable 
 		st.pop();
 		if (n != 0) {
 			for (int i = 0; i < k*w + m*w; ++i) {
-				//cout << Gp.adjList[n].data[i];
 				final_decoding_matrix[index++] = Gp.adjList[n].data[i];
 			}
-			//cout << "->";
 		}
 	}
 	for (int i = 0; i < k*w + m*w; ++i) {
-		//cout << Gp.adjList[node_id].data[i];
 		final_decoding_matrix[index++] = Gp.adjList[node_id].data[i];
 	}
-	//cout << endl;
+	delete[] decoding_equations_num;
 }
 
 void create_decoding_equations(GraphAdjList Gp,int k,int m,int w, Pathmatrix *P, ShortPathTable *D, int *generator_matrix) {
@@ -399,7 +397,24 @@ void create_decoding_equations(GraphAdjList Gp,int k,int m,int w, Pathmatrix *P,
 	delete[] D;
 }
 
-int* enumeration_crs_hybrid_recovery_solution(int k, int m, int w, int failed_disk_id, int *generator_matrix) {
+int enumeration_block_saving(int k, int m, int w, int failed_disk_id){
+	int blocks_savings = 0;
+	for(int i = 0; i < k*w+m*w; ++i){
+		if((i / w) != failed_disk_id){
+			int tmp_savings = 1;
+			for(int j = 0; j < w; ++j){
+				if(final_decoding_matrix[j*(k*w+m*w)+i] == 1){
+					tmp_savings = 0;
+					break;
+				}
+			}
+			blocks_savings += tmp_savings;
+		}
+	}
+	return blocks_savings;
+}
+
+void enumeration_crs_hybrid_recovery_solution(int k, int m, int w, int failed_disk_id, int *generator_matrix) {
 	enumeration_decoding_equations(k,m,w,failed_disk_id,generator_matrix);
 	calculate_node_edge_numbers(k,m,w);//Calculating the number of nodes and edges
 	GraphAdjList GL;
@@ -412,5 +427,4 @@ int* enumeration_crs_hybrid_recovery_solution(int k, int m, int w, int failed_di
 	ShortestPath_Dijkstra(GL, k, m, w, 0, P, D);
 	//Building recovery equation set
 	create_decoding_equations(GL, k, m, w, P, D,generator_matrix);
-	return 0;
 }

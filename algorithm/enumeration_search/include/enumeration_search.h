@@ -1,34 +1,35 @@
 #include <limits.h>
-int* enumeration_crs_hybrid_recovery_solution(int k, int m, int w, int failed_disk_id, int *generator_matrix);
+void enumeration_crs_hybrid_recovery_solution(int k, int m, int w, int failed_disk_id, int *generator_matrix);
+int enumeration_block_saving(int k, int m, int w, int failed_disk_id);
 #define BIG_NUMBER INT_MAX
 
-typedef long long Pathmatrix;    /* 用于存储最短路径下标的数组 */
-typedef int ShortPathTable;/* 用于存储到各点最短路径的权值和 */
+typedef long long Pathmatrix;
+typedef int ShortPathTable;
 
-typedef int* VertexType; /* 顶点类型为int*，表示一个01序列 */
-typedef int EdgeType;    /* 边上的权值类型为int */
+typedef int* VertexType; /* The vertex type is int*, representing a 01 sequence */
+typedef int EdgeType;    /* The weight type on the edge is int */
 
-typedef struct EdgeNode  /* 边表结点 */
+typedef struct EdgeNode  /* edge */
 {
-	long long adjvex;          /* 邻接点域, 存储该顶点对应的下标 */
-	EdgeType weight;     /* 用于存储权值,对于非网图可以不需要 */
-    struct EdgeNode *next;      /* 链域,指向下一个邻接点 */
+	long long adjvex;          /* Subscript corresponding to the vertices */
+	EdgeType weight;     	   /* The weight on the edge */
+    struct EdgeNode *next;         /* Point to the next node */
 } EdgeNode;
 
-typedef struct VextexNode/* 顶点表结点 */
+typedef struct VextexNode/* vertex */
 {
-	VertexType data;     /* 顶点域,存储顶点信息 */
-	EdgeNode *firstedge; /* 边表头指针 */
+	VertexType data;     /* Vertex information */
+	EdgeNode *firstedge; /* The head pointer of a vertex table */
 } VextexNode, AdjList;
 
 typedef struct
 {
 	AdjList* adjList;
-	long long numNodes, numEdges; /* 图中当前顶点数和边数 */
+	long long numNodes, numEdges; /* The number of vertices and the number of edges in the current graph */
 } GraphAdjList;
 
 typedef struct 
 {
-	long long* node_set;//本层的节点集合
-	long long node_num;//本层的节点数
+	long long* node_set;   /* The set of nodes in this layer */
+	long long node_num;    /* The number of nodes in this layer */
 }NodeSet;
