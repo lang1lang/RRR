@@ -39,8 +39,7 @@ int different_failed_blocks(int m, int k, int w, int failed_disk_id, int param_r
     return 0;
 }
 
-void construct_rows_intersection_infor_matrix(int m, int k, int w, int failed_disk_id, int *generator_matrix)
-{
+void construct_rows_intersection_infor_matrix(int m, int k, int w, int failed_disk_id, int *generator_matrix){
 	rows_intersection_infor= new int[(m*w)*(m*w)];
 	for (int i=0;i<(m*w);i++) {
         for (int j=i;j<(m*w);j++) {
@@ -163,7 +162,6 @@ int not_in_failed_disk_selection(int m, int k, int w, int failed_disk_id, int *g
 }
 
 int judge_the_better_candidate(int m, int w, int failed_disk_id, int candidate_one, int candidate_two) {
-    
     int candidate1_sum, candidate2_sum;
     candidate1_sum=0;
     candidate2_sum=0;
@@ -187,7 +185,6 @@ int judge_the_better_candidate(int m, int w, int failed_disk_id, int candidate_o
 }
 
 int crs_better_recovery_exist(int m, int k, int w, int failed_disk_id, int* candidate_replace_parity_groups, int *generator_matrix) {
-
     int i, j;
     int optimal_j=-1; 
     int selected_candidate=-1;//Selected candidate
