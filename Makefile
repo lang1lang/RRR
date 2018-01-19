@@ -22,6 +22,14 @@ ifneq ($(BIN_DIR),)
 $(shell mkdir -p $(BIN_DIR))
 endif
 
+RESULT_DIR    = $(TOP_PATH)/Result
+ifneq ($(RESULT_DIR),)
+$(shell mkdir -p $(RESULT_DIR))
+$(shell mkdir -p $(RESULT_DIR)/Hill-Climbing)
+$(shell mkdir -p $(RESULT_DIR)/Simulated-Annealing)
+$(shell mkdir -p $(RESULT_DIR)/Enumeration)
+endif
+
 TARGET      =  test
 SUBDIRS     =  $(JERASURE_DIR) $(ALGORITHM_DIR) $(EXAMPLE_DIR) $(FILEOUTPUT)
 AFTERDIRS   =  $(EXAMPLE_DIR)
