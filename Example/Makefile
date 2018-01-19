@@ -4,7 +4,7 @@
 # Optimization methods for the recovery of XOR-based erasure codes
 #
 # Author: lyfdamon
-# Since: 2018/1/2
+# Since: 2018/1/19
 #
 #
 

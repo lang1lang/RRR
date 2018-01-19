@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
 	int k, m, w, failed_disk_id;
 	time_t start, end;
 	double cost;
-	string algorithm = "simulated annealing";
+	string algorithm = "Simulated-Annealing";
 	if(argc != 6){
 		fprintf(stderr, "usage: coding_technique k m w failed_disk_id\n");
 		fprintf(stderr,  "\nChoose one of the following coding techniques: \ncauchy_orig, \ncauchy_good, \nliberation, \nblaum_roth, \nliber8tion\n\n");
