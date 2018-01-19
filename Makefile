@@ -30,7 +30,6 @@ $(shell mkdir -p $(RESULT_DIR)/Simulated-Annealing)
 $(shell mkdir -p $(RESULT_DIR)/Enumeration)
 endif
 
-TARGET      =  test
 SUBDIRS     =  $(JERASURE_DIR) $(ALGORITHM_DIR) $(EXAMPLE_DIR) $(FILEOUTPUT)
 AFTERDIRS   =  $(EXAMPLE_DIR)
 OBJECTS     =
