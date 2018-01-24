@@ -251,7 +251,6 @@ void CreateALGraph(int k,int m,int w,GraphAdjList *Gp) {
 	Gp->numNodes = numNodes;//the number of nodes in the graph
 	Gp->numEdges = numEdges;//the number of edges in the graph
 	Gp->adjList = new AdjList[numNodes];//allocate memory space for each node
-	cout << "Create a graph: " << Gp->numNodes << endl;
 	//the following is the initialization of node Z
 	long long node_index = 0;
 	Gp->adjList[node_index].data = new int[k*w+m*w];
@@ -386,13 +385,13 @@ void create_decoding_equations(GraphAdjList Gp,int k,int m,int w, Pathmatrix *P,
 	init_final_decoding_matrix(k, m, w);
 	find_rows(Gp, k, m, w, P, D);
 	//Output decoding matrix
-	cout << "Output decoding matrix: " << endl;
+	/*cout << "Output decoding matrix: " << endl;
 	for (int i = 0; i < w; ++i) {
 		for (int j = 0; j < k*w + m*w; ++j) {
 			cout << final_decoding_matrix[i*(k*w + m*w) + j];
 		}
 		cout << endl;
-	}
+	}*/
 	delete[] P;
 	delete[] D;
 }
