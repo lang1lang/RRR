@@ -4,6 +4,7 @@
 #include<stdlib.h>
 #include<unistd.h>
 #include<time.h>
+#include<string.h>
 #include<fstream>
 #include<fcntl.h>
 #include <sys/types.h> 
