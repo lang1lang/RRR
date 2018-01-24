@@ -28,9 +28,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(DEPS)
 
 all:$(OBJ)
 	
-.PHONY: clean
+.PHONY: all clean
 	
 clean:cleansubdirs
-	rm -f $(OBJECTS)
+	rm -f $(OBJ)
 
 include $(MAKEINCLUDE)
