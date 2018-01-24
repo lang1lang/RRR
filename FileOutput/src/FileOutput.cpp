@@ -48,7 +48,7 @@ void InitOutputFile(const char* path, string kk, string mm, string ww, string fa
 		fprintf(fp, "m : %s\n", mm.c_str());
 		fprintf(fp, "w : %s\n", ww.c_str());
 		fprintf(fp, "failed_disk_id : %s\n", failed_node_id.c_str());
-		fprintf(fp, "conventional_symbol_number    optimized_symbol_number    reduced_symbol_number\n");
+		fprintf(fp, "conventional_symbol_number    optimized_symbol_number    reduced_symbol_number    time\n");
 		fclose(fp);
 	}
 }
@@ -87,7 +87,7 @@ int WriteResult(int conventional_symbol_number, int optimized_symbol_number, int
 			}
 		case Liberation:
 			{
-				string base = "./Result/Liberation-";
+				string base = "./Result/";
 				base += algorithm + "/Liberation-" + kk.str() + "-" + mm.str() + "-" + ww.str() + "-" + failed_node_id.str();
 				path = base.c_str();
 				InitOutputFile(path, kk.str(), mm.str(), ww.str(), failed_node_id.str(), tech, algorithm);
@@ -96,7 +96,7 @@ int WriteResult(int conventional_symbol_number, int optimized_symbol_number, int
 			}
 		case Blaum_Roth:
 			{
-				string base = "./Result/Blaum_Roth-";
+				string base = "./Result/";
 				base += algorithm + "/Blaum_Roth-" + kk.str() + "-" + mm.str() + "-" + ww.str() + "-" + failed_node_id.str();
 				path = base.c_str();
 				InitOutputFile(path, kk.str(), mm.str(), ww.str(), failed_node_id.str(), tech, algorithm);
@@ -105,7 +105,7 @@ int WriteResult(int conventional_symbol_number, int optimized_symbol_number, int
 			}
 		case Liber8tion:
 			{
-				string base = "./Result/Liber8tion-";
+				string base = "./Result/";
 				base += algorithm + "/Liber8tion-" + kk.str() + "-" + mm.str() + "-" + ww.str() + "-" + failed_node_id.str();
 				path = base.c_str();
 				InitOutputFile(path, kk.str(), mm.str(), ww.str(), failed_node_id.str(), tech, algorithm);
@@ -120,11 +120,12 @@ int WriteResult(int conventional_symbol_number, int optimized_symbol_number, int
 	fseek(fp, 0, SEEK_CUR);
 
 	//int to string
-	stringstream conventional_symbol_numbers, optimized_symbol_numbers, reduced_symbol_numbers;
+	stringstream conventional_symbol_numbers, optimized_symbol_numbers, reduced_symbol_numbers, time;
 	conventional_symbol_numbers << conventional_symbol_number;
 	optimized_symbol_numbers << optimized_symbol_number;
 	reduced_symbol_numbers << reduced_symbol_number;
+	time<<cost;
 
-	fprintf(fp, "%s,                            %s,                         %s\n", conventional_symbol_numbers.str().c_str(), optimized_symbol_numbers.str().c_str(), reduced_symbol_numbers.str().c_str());
+	fprintf(fp, "%s,                            %s,                         %s,                       %s\n", conventional_symbol_numbers.str().c_str(), optimized_symbol_numbers.str().c_str(), reduced_symbol_numbers.str().c_str(), time.str().c_str());
 	return 0;
 }
