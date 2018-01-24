@@ -37,7 +37,32 @@ done
 
 for i in {1..100}
 do
+	$(pwd)/bin/climb_test blaum_roth 2 2 4 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/climb_test blaum_roth 3 2 4 0
+done
+
+for i in {1..100}
+do
 	$(pwd)/bin/climb_test blaum_roth 2 2 6 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/climb_test blaum_roth 3 2 6 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/climb_test blaum_roth 4 2 6 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/climb_test blaum_roth 5 2 6 0
 done
 
 for i in {1..100}
@@ -47,12 +72,87 @@ done
 
 for i in {1..100}
 do
+	$(pwd)/bin/climb_test blaum_roth 3 2 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/climb_test blaum_roth 4 2 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/climb_test blaum_roth 5 2 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/climb_test blaum_roth 6 2 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/climb_test blaum_roth 7 2 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/climb_test blaum_roth 8 2 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/climb_test blaum_roth 9 2 10 0
+done
+
+for i in {1..100}
+do
 	$(pwd)/bin/climb_test blaum_roth 2 2 12 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test blaum_roth 2 2 16 0
+	$(pwd)/bin/climb_test blaum_roth 3 2 12 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/climb_test blaum_roth 4 2 12 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/climb_test blaum_roth 5 2 12 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/climb_test blaum_roth 6 2 12 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/climb_test blaum_roth 7 2 12 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/climb_test blaum_roth 8 2 12 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/climb_test blaum_roth 9 2 12 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/climb_test blaum_roth 10 2 12 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/climb_test blaum_roth 11 2 12 0
 done
 
 for i in {1..100}
