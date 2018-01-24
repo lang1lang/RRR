@@ -3,7 +3,6 @@
 #include<iostream>
 #include<vector>
 #include<map>
-#include<string>
 #include<string.h>
 #include<time.h>
 #include "cauchy.h" 
