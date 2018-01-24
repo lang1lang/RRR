@@ -23,14 +23,17 @@ bool is_prime(int N) {
 	}
 	return true;
 }
+double GetTime()
+{
+    return (double) clock() / CLOCKS_PER_SEC;
+}
 int main(int argc, char **argv) {
 	int *matrix = NULL;
 	int *generator_matrix = NULL;
 	int **schedule = NULL;
 	enum Coding_Technique tech;	// coding technique (parameter)
 	int k, m, w, failed_disk_id;
-	time_t start, end;
-	double cost;
+	double LastTime, Time;
 	string algorithm = "Hill-Climbing";
 	if(argc != 6){
 		fprintf(stderr, "usage: coding_technique k m w failed_disk_id\n");
@@ -128,23 +131,23 @@ int main(int argc, char **argv) {
 		schedule = jerasure_smart_bitmatrix_to_schedule(k, m, w, generator_matrix);
 		break;
 	}
-	cout << "Output generation matrix:" << endl;
-	jerasure_print_bitmatrix(generator_matrix, m*w, k*w, w);
+	//cout << "Output generation matrix:" << endl;
+	//jerasure_print_bitmatrix(generator_matrix, m*w, k*w, w);
 
-	cout << endl << endl << "Output the matrix search results of hill_climbing algorithm:" << endl;
-	time(&start);
+	cout << "Output the matrix search results of hill_climbing algorithm:" << endl;
+	LastTime = GetTime();
 	int* crs_parity_group_selection = (int*)malloc(sizeof(int)*(m*w));
 	crs_parity_group_selection = crs_hybrid_recovery_solution(m, k, w, failed_disk_id, generator_matrix);
-	crs_print_parity_group_selection(m, k,w, failed_disk_id,crs_parity_group_selection);
-	time(&end);
+	//crs_print_parity_group_selection(m, k,w, failed_disk_id,crs_parity_group_selection);
+	Time = GetTime() - LastTime;
 	int block_saving = calculate_block_saving(k, m, w, failed_disk_id, generator_matrix, crs_parity_group_selection);
 	int conventional_symbol_number = (k - 1)*w + w;
 	int optimized_symbol_number    = (k - 1)*w - block_saving + w;
 	cout << "Conventional recovery solution: " << conventional_symbol_number << "   ";
 	cout << "Hill_climb recovery solution: " << optimized_symbol_number << endl;
 	cout << "Reduction amount: " << block_saving << endl;
-	WriteResult(conventional_symbol_number, optimized_symbol_number, block_saving, k, m, w, failed_disk_id, tech, algorithm, cost);
-
+	WriteResult(conventional_symbol_number, optimized_symbol_number, block_saving, k, m, w, failed_disk_id, tech, algorithm, Time);
+	cout<<"Time: "<< Time <<endl;
 	//map<int, vector<int> > crs_solution;
 	//get_recovery_solution(k,m,w, failed_disk_id, generator_matrix,crs_parity_group_selection,crs_solution);
 	//cout << "Output the scheme for file reading and writing: " << endl;

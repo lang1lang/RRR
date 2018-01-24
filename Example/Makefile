@@ -12,33 +12,24 @@
 SRC_DIR = .
 OBJ_DIR = $(CURDIR)/obj
 
-jerasure_include           = ../jerasure/include
-climb_search_include       = ../algorithm/climb_search/include
-sa_search_include          = ../algorithm/sa_search/include
-enumeration_search_include = ../algorithm/enumeration_search/include
-fileoutput_include         = ../FileOutput/include
-jerasure_obj               = ../jerasure/obj
-climb_search_obj           = ../algorithm/climb_search/obj
-sa_search_obj              = ../algorithm/sa_search/obj
-enumeration_search_obj     = ../algorithm/enumeration_search/obj
-fileoutput_obj             = ../FileOutput/obj
-
+include                    = -I../jerasure/include -I../algorithm/climb_search/include -I../algorithm/sa_search/include -I../algorithm/ga_search/include -I../algorithm/enumeration_search/include -I../FileOutput/include
+obj                        = -I../jerasure/obj -I../algorithm/climb_search/obj -I../algorithm/sa_search/obj -I../algorithm/ga_search/obj -I../algorithm/enumeration_search/obj -I../FileOutput/obj
 
 ifneq ($(OBJ_DIR),)
 $(shell mkdir -p $(OBJ_DIR))
 endif
 
-_OBJ    = climb_test.o sa_test.o enumeration_test.o 
+_OBJ    = climb_test.o sa_test.o ga_test.o enumeration_test.o 
 OBJ     = $(patsubst %, $(OBJ_DIR)/%, $(_OBJ))
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	$(CC) -c $< $(CFLAGS)  -o $@ -I$(jerasure_include) -I$(jerasure_obj) -I$(climb_search_include) -I$(climb_search_obj) -I$(sa_search_include) -I$(sa_search_obj) -I$(enumeration_search_include) -I$(enumeration_search_obj) -I$(fileoutput_include) -I$(fileoutput_obj)
+	$(CC) -c $< $(CFLAGS)  -o $@ $(include) $(obj)
 
 all:$(OBJ)
 	
-.PHONY:clean
+.PHONY: all clean
 
 clean:cleansubdirs
-	rm -f $(OBJECTS)
+	rm -f $(OBJ)
 
 include $(MAKEINCLUDE)

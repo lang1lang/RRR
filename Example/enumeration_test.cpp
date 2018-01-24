@@ -23,14 +23,17 @@ bool is_prime(int N) {
 	}
 	return true;
 }
+double GetTime()
+{
+    return (double) clock() / CLOCKS_PER_SEC;
+}
 int main(int argc, char **argv) {
 	int *matrix = NULL;
 	int *generator_matrix = NULL;
 	int **schedule = NULL;
 	enum Coding_Technique tech;	// coding technique (parameter)
 	int k, m, w, failed_disk_id;
-	time_t start, end;
-	double cost;
+	double LastTime, Time;
 	string algorithm = "Enumeration";
 
 	if(argc != 6){
@@ -131,14 +134,13 @@ int main(int argc, char **argv) {
 		break;
 	}
 
-	cout << "Output generation matrix: " << endl;
-	jerasure_print_bitmatrix(generator_matrix, m*w, k*w, w);
+	//cout << "Output generation matrix: " << endl;
+	//jerasure_print_bitmatrix(generator_matrix, m*w, k*w, w);
 
 	cout << "Output the matrix search results of enumeration algorithm: " << endl;
-	time(&start);
+	LastTime = GetTime();
 	enumeration_crs_hybrid_recovery_solution(k, m, w, failed_disk_id, generator_matrix);
-	time(&end);
-	cost = difftime(end,start);
+	Time = GetTime() - LastTime;
 	
 	int block_saving = enumeration_block_saving(k, m, w, failed_disk_id);
 	int conventional_symbol_number = (k - 1)*w + w;
@@ -147,6 +149,7 @@ int main(int argc, char **argv) {
 	cout << "Enumeration recovery solution: " << optimized_symbol_number << endl;
 	cout << "Reduction amount:  " << conventional_symbol_number - optimized_symbol_number << endl;
 
-	WriteResult(conventional_symbol_number, optimized_symbol_number, block_saving, k, m, w, failed_disk_id, tech, algorithm, cost);
+	WriteResult(conventional_symbol_number, optimized_symbol_number, block_saving, k, m, w, failed_disk_id, tech, algorithm, Time);
+	cout<<"Time: "<< Time <<endl;
 	return 0;
 }

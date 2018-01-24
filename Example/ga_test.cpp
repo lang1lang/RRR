@@ -9,7 +9,7 @@
 #include "cauchy.h" 
 #include "jerasure.h"
 #include "liberation.h"
-#include "sa_search.h"
+#include "ga_search.h"
 #include "FileOutput.h"
 using namespace std;
 bool is_prime(int N) {
@@ -35,7 +35,7 @@ int main(int argc, char **argv) {
 	enum Coding_Technique tech;	// coding technique (parameter)
 	int k, m, w, failed_disk_id;
 	double LastTime, Time;
-	string algorithm = "Simulated-Annealing";
+	string algorithm = "Genetic";
 	if(argc != 6){
 		fprintf(stderr, "usage: coding_technique k m w failed_disk_id\n");
 		fprintf(stderr,  "\nChoose one of the following coding techniques: \ncauchy_orig, \ncauchy_good, \nliberation, \nblaum_roth, \nliber8tion\n\n");
@@ -133,22 +133,22 @@ int main(int argc, char **argv) {
 		schedule = jerasure_smart_bitmatrix_to_schedule(k, m, w, generator_matrix);
 		break;
 	}
-	//cout << "Output generation matrix:" << endl;
-	//jerasure_print_bitmatrix(generator_matrix, m*w, k*w, w);
+	cout << "Output generation matrix:" << endl;
+	jerasure_print_bitmatrix(generator_matrix, m*w, k*w, w);
 	
 	cout << "Output the matrix search results of simulated annealing algorithm:" << endl;
 	LastTime = GetTime();
-	int* sa_crs_parity_group_selection = sa_crs_hybrid_recovery_solution(k, m, w, failed_disk_id, generator_matrix);
+	int* ga_crs_parity_group_selection = ga_crs_hybrid_recovery_solution(k, m, w, failed_disk_id, generator_matrix);
 	//sa_crs_print_parity_group_selection(m, w, sa_crs_parity_group_selection);
 	Time = GetTime() - LastTime;
 	
-	int sa_block_saving = sa_calculate_block_saving(k, m, w, failed_disk_id, generator_matrix, sa_crs_parity_group_selection);
-	int conventional_symbol_number = (k - 1)*w + w;
-	int optimized_symbol_number    = (k - 1)*w - sa_block_saving + w;
-	cout << "Conventional recovery solution: " << conventional_symbol_number << "   ";
-	cout << "Random recovery solution: " << optimized_symbol_number << endl;
-	cout << "Reduction amount:  " << sa_block_saving << endl;
-	WriteResult(conventional_symbol_number, optimized_symbol_number, sa_block_saving, k, m, w, failed_disk_id, tech, algorithm, Time);
+	//int sa_block_saving = sa_calculate_block_saving(k, m, w, failed_disk_id, generator_matrix, sa_crs_parity_group_selection);
+	//int conventional_symbol_number = (k - 1)*w + w;
+	//int optimized_symbol_number    = (k - 1)*w - sa_block_saving + w;
+	//cout << "Conventional recovery solution: " << conventional_symbol_number << "   ";
+	//cout << "Random recovery solution: " << optimized_symbol_number << endl;
+	//cout << "Reduction amount:  " << sa_block_saving << endl;
+	//WriteResult(conventional_symbol_number, optimized_symbol_number, sa_block_saving, k, m, w, failed_disk_id, tech, algorithm, Time);
 	cout<<"Time: "<<Time<<endl;
 	//map<int, vector<int> > crs_solution;
 	//sa_get_recovery_solution(k,m,w, failed_disk_id, generator_matrix,sa_crs_parity_group_selection,crs_solution);
