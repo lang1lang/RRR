@@ -126,6 +126,6 @@ int WriteResult(int conventional_symbol_number, int optimized_symbol_number, int
 	reduced_symbol_numbers << reduced_symbol_number;
 	time<<cost;
 
-	fprintf(fp, "%s,                            %s,                         %s,                       %s\n", conventional_symbol_numbers.str().c_str(), optimized_symbol_numbers.str().c_str(), reduced_symbol_numbers.str().c_str(), time.str().c_str());
+	fprintf(fp, "%s,                            %s,                       %s,                       %s\n", conventional_symbol_numbers.str().c_str(), optimized_symbol_numbers.str().c_str(), reduced_symbol_numbers.str().c_str(), time.str().c_str());
 	return 0;
 }
