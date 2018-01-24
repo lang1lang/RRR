@@ -7,150 +7,250 @@ code_types=("Cauchy_Orig" "Cauchy_Good" "Liberation" "Blaum_Roth" "Liber8tion")
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test liber8tion 2 2 8 0
+	$(pwd)/bin/sa_test liber8tion 2 2 8 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test liber8tion 3 2 8 0
+	$(pwd)/bin/sa_test liber8tion 3 2 8 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test liber8tion 4 2 8 0
+	$(pwd)/bin/sa_test liber8tion 4 2 8 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test liber8tion 5 2 8 0
+	$(pwd)/bin/sa_test liber8tion 5 2 8 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test liber8tion 6 2 8 0
+	$(pwd)/bin/sa_test liber8tion 6 2 8 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test liber8tion 7 2 8 0
+	$(pwd)/bin/sa_test liber8tion 7 2 8 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test blaum_roth 2 2 6 0
+	$(pwd)/bin/sa_test blaum_roth 2 2 4 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test blaum_roth 2 2 10 0
+	$(pwd)/bin/sa_test blaum_roth 3 2 4 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test blaum_roth 2 2 12 0
+	$(pwd)/bin/sa_test blaum_roth 2 2 6 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test blaum_roth 2 2 16 0
+	$(pwd)/bin/sa_test blaum_roth 3 2 6 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test cauchy_good 2 2 10 0
+	$(pwd)/bin/sa_test blaum_roth 4 2 6 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test cauchy_good 3 2 10 0
+	$(pwd)/bin/sa_test blaum_roth 5 2 6 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test cauchy_good 4 2 10 0
+	$(pwd)/bin/sa_test blaum_roth 2 2 10 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test cauchy_good 5 2 10 0
+	$(pwd)/bin/sa_test blaum_roth 3 2 10 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test cauchy_good 6 2 10 0
+	$(pwd)/bin/sa_test blaum_roth 4 2 10 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test cauchy_good 7 2 10 0
+	$(pwd)/bin/sa_test blaum_roth 5 2 10 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test cauchy_good 8 2 10 0
+	$(pwd)/bin/sa_test blaum_roth 6 2 10 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test cauchy_good 9 2 10 0
+	$(pwd)/bin/sa_test blaum_roth 7 2 10 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test cauchy_good 5 4 10 0
+	$(pwd)/bin/sa_test blaum_roth 8 2 10 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test cauchy_good 6 4 10 0
+	$(pwd)/bin/sa_test blaum_roth 9 2 10 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test cauchy_good 7 4 10 0
+	$(pwd)/bin/sa_test blaum_roth 2 2 12 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test cauchy_good 8 4 10 0
+	$(pwd)/bin/sa_test blaum_roth 3 2 12 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test cauchy_good 8 3 10 0
+	$(pwd)/bin/sa_test blaum_roth 4 2 12 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test cauchy_good 8 4 10 0
+	$(pwd)/bin/sa_test blaum_roth 5 2 12 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test cauchy_good 8 5 10 0
+	$(pwd)/bin/sa_test blaum_roth 6 2 12 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test cauchy_good 8 6 10 0
+	$(pwd)/bin/sa_test blaum_roth 7 2 12 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test cauchy_good 8 4 10 0
+	$(pwd)/bin/sa_test blaum_roth 8 2 12 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test cauchy_good 8 4 11 0
+	$(pwd)/bin/sa_test blaum_roth 9 2 12 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test cauchy_good 8 4 12 0
+	$(pwd)/bin/sa_test blaum_roth 10 2 12 0
 done
 
 for i in {1..100}
 do
-	$(pwd)/bin/climb_test cauchy_good 8 4 13 0
+	$(pwd)/bin/sa_test blaum_roth 11 2 12 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/sa_test cauchy_good 2 2 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/sa_test cauchy_good 3 2 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/sa_test cauchy_good 4 2 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/sa_test cauchy_good 5 2 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/sa_test cauchy_good 6 2 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/sa_test cauchy_good 7 2 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/sa_test cauchy_good 8 2 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/sa_test cauchy_good 9 2 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/sa_test cauchy_good 5 4 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/sa_test cauchy_good 6 4 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/sa_test cauchy_good 7 4 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/sa_test cauchy_good 8 4 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/sa_test cauchy_good 8 3 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/sa_test cauchy_good 8 4 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/sa_test cauchy_good 8 5 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/sa_test cauchy_good 8 6 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/sa_test cauchy_good 8 4 10 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/sa_test cauchy_good 8 4 11 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/sa_test cauchy_good 8 4 12 0
+done
+
+for i in {1..100}
+do
+	$(pwd)/bin/sa_test cauchy_good 8 4 13 0
 done
