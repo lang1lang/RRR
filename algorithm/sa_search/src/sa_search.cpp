@@ -106,32 +106,29 @@ void init_crs_hybrid_parity_group_selection(int k, int m, int w, int faild_disk_
 	sa_crs_hybrid_parity_group_selection_index = new int[w];
 	for (int i = 0; i < m*w; i++) {
 		sa_crs_hybrid_parity_group_selection[i] = 0;
-		if (i<w) {
-			sa_crs_hybrid_parity_group_selection[i] = 1;
-			sa_crs_hybrid_parity_group_selection_index[i] = i;
+		//if (i<w) {
+		//	sa_crs_hybrid_parity_group_selection[i] = 1;
+		//	sa_crs_hybrid_parity_group_selection_index[i] = i;
+		//}
+	}
+	for (int i = 0; i < w; ++i) {
+		srand((unsigned)time(NULL));
+		int symbol_id = rand() % sa_crs_recovery_equation_group_index_number[i];
+		while (sa_crs_hybrid_parity_group_selection[sa_crs_recovery_equation_group_index[i][symbol_id]] == 1) {
+			symbol_id = rand() % sa_crs_recovery_equation_group_index_number[i];
 		}
+		sa_crs_hybrid_parity_group_selection[sa_crs_recovery_equation_group_index[i][symbol_id]] = 1;
+		sa_crs_hybrid_parity_group_selection_index[i] = sa_crs_recovery_equation_group_index[i][symbol_id];
 	}
-	//for (int i = 0; i < w; ++i) {
-	//	srand((unsigned)time(NULL));
-	//	int symbol_id = rand() % sa_crs_recovery_equation_group_index_number[i];
-	//	while (sa_crs_hybrid_parity_group_selection[sa_crs_recovery_equation_group_index[i][symbol_id]] == 1) {
-	//		symbol_id = rand() % sa_crs_recovery_equation_group_index_number[i];
-	//	}
-	//	sa_crs_hybrid_parity_group_selection[sa_crs_recovery_equation_group_index[i][symbol_id]] = 1;
-	//	sa_crs_hybrid_parity_group_selection_index[i] = sa_crs_recovery_equation_group_index[i][symbol_id];
+	//cout << "Output filtered results:" << endl;
+	//for (int i = 0; i < m*w; i++) {
+	//	printf("%d ", sa_crs_hybrid_parity_group_selection[i]);
 	//}
-	//free(sa_crs_recovery_equation_group);
-	//free(sa_crs_recovery_equation_group_index);
-	//free(sa_crs_recovery_equation_group_index_number);
-	cout << "Output filtered results:" << endl;
-	for (int i = 0; i < m*w; i++) {
-		printf("%d ", sa_crs_hybrid_parity_group_selection[i]);
-	}
-	printf("\n");
-	for (int i = 0; i < w; i++) {
-		printf("%d ", sa_crs_hybrid_parity_group_selection_index[i]);
-	}
-	printf("\n");
+	//printf("\n");
+	//for (int i = 0; i < w; i++) {
+	//	printf("%d ", sa_crs_hybrid_parity_group_selection_index[i]);
+	//}
+	//printf("\n");
 }
 void init_crs_hybrid_parity_group_selection_best(int k,int m,int w, int* generator_matrix) {
 	sa_crs_hybrid_parity_group_selection_best = new int[m*w];
@@ -284,7 +281,7 @@ bool sa_judge_in_failed_disk_selection(int k,int m,int w,int failed_disk_id,int*
 }
 
 void sa_search_recovery_solution(int k,int m,int w,int failed_disk_id,int *generator_matrix) {
-	double K = 0.96, T= k*w*k*m*w, M = k*w*k*m*w, L = k*m*w*w;//M= w*w*m*w, L = w*w*m;
+	double K = 0.97, T= k*w*k*m*w, M = k*w*k*m*w, L = k*m*w*w;
 	double ini = M;
 	double remain_times = ini;
 	double random_probability = 0;
@@ -364,6 +361,81 @@ void sa_search_recovery_solution(int k,int m,int w,int failed_disk_id,int *gener
 	//return sa_crs_hybrid_parity_group_selection_best;
 }
 
+void sa_search_recovery_solution_test(int k,int m,int w,int failed_disk_id,int *generator_matrix) {
+	double K = 0.97, T= k*w*k*m*w, M = k*w*k*m*w, L = k*m*w*w;
+	double ini = M;
+	double remain_times = ini;
+	double random_probability = 0;
+	int all_profit = 0;
+	int all_profit_new = 0;
+	int all_profit_best = 0;
+	int* temporary_group_id = new int[w];
+	int temporary_group_id_index = 0;
+	int all_profit_difference = 0;
+	while(remain_times > 0 && T > 0.001) {
+		srand((unsigned)time(NULL));
+		for (int l = 0; l < L; l++) {
+			int symbol_id = rand() % (m*w);
+			while (sa_judge_in_failed_disk_selection(k, m, w, failed_disk_id, generator_matrix, symbol_id, temporary_group_id)) {
+				symbol_id = rand() % (m*w);
+			}
+			int temporary_group_id_index = 0;
+			for (int s = 0; s < k*w; s++) {
+				if (s / w == failed_disk_id) {
+					if (generator_matrix[symbol_id*k*w + s] == 1) {
+						temporary_group_id[temporary_group_id_index] = s%w;
+						temporary_group_id_index++;
+					}
+				}
+			}
+			int group_id = temporary_group_id[rand() % temporary_group_id_index];
+			
+			/*cout << "Temporary group before replacement: ";
+			print_crs_temporary_solution(m, w);*/
+			all_profit = calculate_all_profit(k, m, w, failed_disk_id, generator_matrix,sa_crs_hybrid_parity_group_selection_temporary);
+			all_profit_best = calculate_all_profit(k, m, w, failed_disk_id, generator_matrix, sa_crs_hybrid_parity_group_selection_best);
+			
+			sa_crs_hybrid_parity_group_selection_temporary[sa_crs_hybrid_parity_group_selection_temporary_index[group_id]] = 0;
+			sa_crs_hybrid_parity_group_selection_temporary[symbol_id] = 1;
+			sa_crs_hybrid_parity_group_selection_temporary_index[group_id] = symbol_id;
+
+			all_profit_new = calculate_all_profit(k, m, w, failed_disk_id, generator_matrix, sa_crs_hybrid_parity_group_selection_temporary);
+			/*cout << "  profit:" << all_profit << "	";
+			cout << "Temporary group after replacement:";
+			print_crs_temporary_solution(m, w);
+			cout << "  all_profit_new:" << all_profit_new << "	"; 
+			cout << endl;*/
+			all_profit_difference = all_profit - all_profit_new;//The difference between the amount of data before replacement and the amount of data after replacement
+			if (all_profit_difference > 0) {
+				receive_replacement(m, w);
+				if (all_profit_best > all_profit_new) {
+					remember_best(m,w);
+				}
+				remain_times = ini;
+			}
+			else {
+				random_probability = (double)(rand() / (double)RAND_MAX);
+				if (exp(all_profit_difference / T)>random_probability) {
+					receive_replacement(m, w);
+					T = K*T;
+					remain_times = ini;
+				}
+				else {
+					remain_times--;
+					sa_crs_hybrid_parity_group_selection_temporary[symbol_id] = 0;
+					sa_crs_hybrid_parity_group_selection_temporary[sa_crs_hybrid_parity_group_selection_index[group_id]] = 1;
+					sa_crs_hybrid_parity_group_selection_temporary_index[group_id] = sa_crs_hybrid_parity_group_selection_index[group_id];
+				}
+			}
+		}
+	}
+	delete[] temporary_group_id;
+	delete[] sa_crs_hybrid_parity_group_selection_temporary;
+	delete[] sa_crs_hybrid_parity_group_selection_temporary_index;
+	delete[] sa_crs_hybrid_parity_group_selection;
+	delete[] sa_crs_hybrid_parity_group_selection_index;
+	delete[] sa_crs_hybrid_parity_group_selection_best_index;
+}
 bool judge_include(int* index,int row,int w) {
 	bool judge = false;
 	for (int i = 0; i < w;i++) {
@@ -432,9 +504,8 @@ int* sa_crs_hybrid_recovery_solution(int k, int m, int w, int failed_disk_id, in
 	init_crs_hybrid_parity_group_selection(k, m, w, failed_disk_id,generator_matrix);
 	init_crs_hybrid_parity_group_selection_best(k,m,w,generator_matrix);
 	init_crs_hybrid_parity_group_selection_temporary(k, m, w,  generator_matrix);
-	int all_profit_best = calculate_all_profit(k, m, w, failed_disk_id, generator_matrix, sa_crs_hybrid_parity_group_selection_best);
-	cout << "all_profit_best: "<<all_profit_best << endl;
-	sa_search_recovery_solution(k,m,w,failed_disk_id,generator_matrix);
+	//sa_search_recovery_solution(k,m,w,failed_disk_id,generator_matrix);
+	sa_search_recovery_solution_test(k,m,w,failed_disk_id,generator_matrix);
 	return sa_crs_hybrid_parity_group_selection_best;
 }
 
