@@ -31,7 +31,7 @@ all:$(OBJ)
 .PHONY: all clean
 
 clean:cleansubdirs
-	rm -f $(OBJ)
+	rm -rf $(OBJ_DIR)
 
 include $(MAKEINCLUDE)
 
