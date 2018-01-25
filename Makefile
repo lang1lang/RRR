@@ -28,7 +28,6 @@ $(shell mkdir -p $(RESULT_DIR))
 $(shell mkdir -p $(RESULT_DIR)/Hill-Climbing)
 $(shell mkdir -p $(RESULT_DIR)/Simulated-Annealing)
 $(shell mkdir -p $(RESULT_DIR)/Enumeration)
-$(shell mkdir -p $(RESULT_DIR)/Genetic)
 endif
 
 SUBDIRS     =  $(JERASURE_DIR) $(ALGORITHM_DIR) $(EXAMPLE_DIR) $(FILEOUTPUT)
@@ -44,7 +43,6 @@ all:subdirs $(OBJECTS)
 	${CC} $(EXAMPLE_DIR)/obj/climb_test.o $(JERASURE_DIR)/obj/*.o $(ALGORITHM_DIR)/climb_search/obj/*.o $(FILEOUTPUT)/obj/*.o $(LDFLAGS) -o ${BIN_DIR}/climb_test
 	${CC} $(EXAMPLE_DIR)/obj/sa_test.o $(JERASURE_DIR)/obj/*.o $(ALGORITHM_DIR)/sa_search/obj/*.o $(FILEOUTPUT)/obj/*.o $(LDFLAGS) -o ${BIN_DIR}/sa_test
 	${CC} $(EXAMPLE_DIR)/obj/enumeration_test.o $(JERASURE_DIR)/obj/*.o $(ALGORITHM_DIR)/enumeration_search/obj/*.o $(FILEOUTPUT)/obj/*.o $(LDFLAGS) -o ${BIN_DIR}/enumeration_test
-	${CC} $(EXAMPLE_DIR)/obj/ga_test.o $(JERASURE_DIR)/obj/*.o $(ALGORITHM_DIR)/ga_search/obj/*.o $(FILEOUTPUT)/obj/*.o $(LDFLAGS) -o ${BIN_DIR}/ga_test
 # Help message
 help:
 	@echo "optimization method for XOR-code"
@@ -56,7 +54,7 @@ help:
 
 #Rule for clean the project
 clean:cleansubdirs
-		
+	rm -rf $(BIN_DIR)
 # path of "make build scripts"
 # NOTE, use absolute path, export once, use in all subdirs
 export TOP_PATH
