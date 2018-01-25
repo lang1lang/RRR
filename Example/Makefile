@@ -12,14 +12,14 @@
 SRC_DIR = .
 OBJ_DIR = $(CURDIR)/obj
 
-include                    = -I../jerasure/include -I../algorithm/climb_search/include -I../algorithm/sa_search/include -I../algorithm/ga_search/include -I../algorithm/enumeration_search/include -I../FileOutput/include
-obj                        = -I../jerasure/obj -I../algorithm/climb_search/obj -I../algorithm/sa_search/obj -I../algorithm/ga_search/obj -I../algorithm/enumeration_search/obj -I../FileOutput/obj
+include                    = -I../jerasure/include -I../algorithm/climb_search/include -I../algorithm/sa_search/include -I../algorithm/enumeration_search/include -I../FileOutput/include
+obj                        = -I../jerasure/obj -I../algorithm/climb_search/obj -I../algorithm/sa_search/obj -I../algorithm/enumeration_search/obj -I../FileOutput/obj
 
 ifneq ($(OBJ_DIR),)
 $(shell mkdir -p $(OBJ_DIR))
 endif
 
-_OBJ    = climb_test.o sa_test.o ga_test.o enumeration_test.o 
+_OBJ    = climb_test.o sa_test.o enumeration_test.o 
 OBJ     = $(patsubst %, $(OBJ_DIR)/%, $(_OBJ))
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
@@ -30,6 +30,6 @@ all:$(OBJ)
 .PHONY: all clean
 
 clean:cleansubdirs
-	rm -f $(OBJ)
+	rm -rf $(OBJ_DIR)
 
 include $(MAKEINCLUDE)
