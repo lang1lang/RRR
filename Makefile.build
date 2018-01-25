@@ -31,7 +31,7 @@ OBJDUMP		= $(CROSS_COMPILE)objdump
 ARFLAGS         = cr
 RM              = -rm -rf
 
-CFLAGS          = -Werror -Wno-unused-but-set-variable -g
+CFLAGS          = -Werror -o2 -Wno-unused-but-set-variable -g
 LDFLAGS         = -lm
 
 # recursive make
