@@ -7,7 +7,7 @@
 #
 #
 
-SUBDIRS = $(CURDIR)/climb_search $(CURDIR)/sa_search $(CURDIR)/enumeration_search $(CURDIR)/ga_search
+SUBDIRS = $(CURDIR)/climb_search $(CURDIR)/sa_search $(CURDIR)/enumeration_search
 
 all:subdirs
 
