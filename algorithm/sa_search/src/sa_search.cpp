@@ -281,7 +281,7 @@ bool sa_judge_in_failed_disk_selection(int k,int m,int w,int failed_disk_id,int*
 }
 
 void sa_search_recovery_solution(int k,int m,int w,int failed_disk_id,int *generator_matrix) {
-	double K = 0.97, T= k*w*k*m*w, M = k*w*k*m*w, L = k*m*w*w;
+	double K = 0.97, T= k*m*w*w, M = k*m*w*w, L = k*m*w*w;
 	double ini = M;
 	double remain_times = ini;
 	double random_probability = 0;
@@ -331,94 +331,12 @@ void sa_search_recovery_solution(int k,int m,int w,int failed_disk_id,int *gener
 				if (all_profit_best > all_profit_new) {
 					remember_best(m,w);
 				}
-				remain_times = ini;
-			}
-			else {
-				random_probability = (double)(rand() / (double)RAND_MAX);
-				//printf("When not received, all_profit_difference=%d T=%f exp(all_profit_difference/T)=%f random_probability=%f\n\n", all_profit_difference, T, exp(all_profit_difference / T), random_probability);
-				if (exp(all_profit_difference / T)>random_probability) {
-					receive_replacement(m, w);
-					//cout << "all_profit_best: " << all_profit_best << "  all_profit_new: " << all_profit_new << "  T:" << T << "  remain_times: " << remain_times << endl;
-					//printf("When not received, all_profit_difference=%d T=%f exp(all_profit_difference/T)=%f random_probability=%f\n\n\n", all_profit_difference, T, exp(all_profit_difference / T), random_probability);
-					T = K*T;
-					remain_times = ini;
-				}
-				else {
-					remain_times--;
-					sa_crs_hybrid_parity_group_selection_temporary[symbol_id] = 0;
-					sa_crs_hybrid_parity_group_selection_temporary[sa_crs_hybrid_parity_group_selection_index[group_id]] = 1;
-					sa_crs_hybrid_parity_group_selection_temporary_index[group_id] = sa_crs_hybrid_parity_group_selection_index[group_id];
-				}
-			}
-		}
-	}
-	delete[] temporary_group_id;
-	delete[] sa_crs_hybrid_parity_group_selection_temporary;
-	delete[] sa_crs_hybrid_parity_group_selection_temporary_index;
-	delete[] sa_crs_hybrid_parity_group_selection;
-	delete[] sa_crs_hybrid_parity_group_selection_index;
-	delete[] sa_crs_hybrid_parity_group_selection_best_index;
-	//return sa_crs_hybrid_parity_group_selection_best;
-}
-
-void sa_search_recovery_solution_test(int k,int m,int w,int failed_disk_id,int *generator_matrix) {
-	double K = 0.97, T= k*w*k*m*w, M = k*w*k*m*w, L = k*m*w*w;
-	double ini = M;
-	double remain_times = ini;
-	double random_probability = 0;
-	int all_profit = 0;
-	int all_profit_new = 0;
-	int all_profit_best = 0;
-	int* temporary_group_id = new int[w];
-	int temporary_group_id_index = 0;
-	int all_profit_difference = 0;
-	while(remain_times > 0 && T > 0.001) {
-		srand((unsigned)time(NULL));
-		for (int l = 0; l < L; l++) {
-			int symbol_id = rand() % (m*w);
-			while (sa_judge_in_failed_disk_selection(k, m, w, failed_disk_id, generator_matrix, symbol_id, temporary_group_id)) {
-				symbol_id = rand() % (m*w);
-			}
-			int temporary_group_id_index = 0;
-			for (int s = 0; s < k*w; s++) {
-				if (s / w == failed_disk_id) {
-					if (generator_matrix[symbol_id*k*w + s] == 1) {
-						temporary_group_id[temporary_group_id_index] = s%w;
-						temporary_group_id_index++;
-					}
-				}
-			}
-			int group_id = temporary_group_id[rand() % temporary_group_id_index];
-			
-			/*cout << "Temporary group before replacement: ";
-			print_crs_temporary_solution(m, w);*/
-			all_profit = calculate_all_profit(k, m, w, failed_disk_id, generator_matrix,sa_crs_hybrid_parity_group_selection_temporary);
-			all_profit_best = calculate_all_profit(k, m, w, failed_disk_id, generator_matrix, sa_crs_hybrid_parity_group_selection_best);
-			
-			sa_crs_hybrid_parity_group_selection_temporary[sa_crs_hybrid_parity_group_selection_temporary_index[group_id]] = 0;
-			sa_crs_hybrid_parity_group_selection_temporary[symbol_id] = 1;
-			sa_crs_hybrid_parity_group_selection_temporary_index[group_id] = symbol_id;
-
-			all_profit_new = calculate_all_profit(k, m, w, failed_disk_id, generator_matrix, sa_crs_hybrid_parity_group_selection_temporary);
-			/*cout << "  profit:" << all_profit << "	";
-			cout << "Temporary group after replacement:";
-			print_crs_temporary_solution(m, w);
-			cout << "  all_profit_new:" << all_profit_new << "	"; 
-			cout << endl;*/
-			all_profit_difference = all_profit - all_profit_new;//The difference between the amount of data before replacement and the amount of data after replacement
-			if (all_profit_difference > 0) {
-				receive_replacement(m, w);
-				if (all_profit_best > all_profit_new) {
-					remember_best(m,w);
-				}
-				remain_times = ini;
 			}
 			else {
 				random_probability = (double)(rand() / (double)RAND_MAX);
 				if (exp(all_profit_difference / T)>random_probability) {
 					receive_replacement(m, w);
 					T = K*T;
-					remain_times = ini;
 				}
 				else {
 					remain_times--;
@@ -436,6 +354,7 @@ void sa_search_recovery_solution_test(int k,int m,int w,int failed_disk_id,int *
 	delete[] sa_crs_hybrid_parity_group_selection_index;
 	delete[] sa_crs_hybrid_parity_group_selection_best_index;
 }
+
 bool judge_include(int* index,int row,int w) {
 	bool judge = false;
 	for (int i = 0; i < w;i++) {
@@ -504,8 +423,7 @@ int* sa_crs_hybrid_recovery_solution(int k, int m, int w, int failed_disk_id, in
 	init_crs_hybrid_parity_group_selection(k, m, w, failed_disk_id,generator_matrix);
 	init_crs_hybrid_parity_group_selection_best(k,m,w,generator_matrix);
 	init_crs_hybrid_parity_group_selection_temporary(k, m, w,  generator_matrix);
-	//sa_search_recovery_solution(k,m,w,failed_disk_id,generator_matrix);
-	sa_search_recovery_solution_test(k,m,w,failed_disk_id,generator_matrix);
+	sa_search_recovery_solution(k,m,w,failed_disk_id,generator_matrix);
 	return sa_crs_hybrid_parity_group_selection_best;
 }
 
