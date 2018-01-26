@@ -49,11 +49,11 @@ for i in {1..300}
 do
 	for k in {2..8}
 	do 
-		for ((m = 2; m <= k; ++m))
+		for ((m = 2; m <= $k; ++m))
 		do
 			for w in {2..8}
 			do
-				$(pwd)/bin/climb_test cauchy_good k m w 0
+				$(pwd)/bin/climb_test cauchy_good $k $m $w 0
 			done
 		done
 	done
