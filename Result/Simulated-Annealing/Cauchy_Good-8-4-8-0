@@ -1,0 +1,19 @@
+COMMENT : The search result by Simulated-Annealing for Cauchy_Good Sat Jan 27 10:44:46 2018
+
+tech : Cauchy_Good
+algorithm : Simulated-Annealing
+k : 8
+m : 4
+w : 8
+failed_disk_id : 0
+conventional_symbol_number    optimized_symbol_number    reduced_symbol_number    time
+64,                            53,                       11,                       1.74
+64,                            52,                       12,                       1.83
+64,                            52,                       12,                       1.8
+64,                            53,                       11,                       0.93
+64,                            53,                       11,                       0.92
+64,                            53,                       11,                       1.75
+64,                            53,                       11,                       0.91
+64,                            52,                       12,                       1.88
+64,                            53,                       11,                       0.92
+64,                            53,                       11,                       0.92
