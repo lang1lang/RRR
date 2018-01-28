@@ -7,54 +7,20 @@ code_types=("Cauchy_Orig" "Cauchy_Good" "Liberation" "Blaum_Roth" "Liber8tion")
 
 for i in {1..300}
 do
-	$(pwd)/bin/climb_test liber8tion 2 2 8 0
+	$(pwd)/bin/sa_test cauchy_good 5 4 5 0	
 done
 
 for i in {1..300}
 do
-	$(pwd)/bin/climb_test liber8tion 4 2 8 0
+	$(pwd)/bin/sa_test cauchy_good 5 4 6 0
+done
+
+for i in {1..300}
+do	
+	$(pwd)/bin/sa_test cauchy_good 5 4 7 0
 done
 
 for i in {1..300}
 do
-	$(pwd)/bin/climb_test blaum_roth 2 2 6 0
-done
-
-for i in {1..300}
-do
-	$(pwd)/bin/climb_test blaum_roth 2 2 10 0
-done
-
-for i in {1..300}
-do
-	$(pwd)/bin/climb_test blaum_roth 8 2 12 0
-done
-
-for i in {1..300}
-do
-	$(pwd)/bin/climb_test blaum_roth 9 2 12 0
-done
-
-for i in {1..300}
-do
-	$(pwd)/bin/climb_test blaum_roth 10 2 12 0
-done
-
-for i in {1..300}
-do
-	$(pwd)/bin/climb_test blaum_roth 11 2 12 0
-done
-
-for i in {1..300}
-do
-	for k in {2..8}
-	do 
-		for ((m = 2; m <= $k; ++m))
-		do
-			for w in {2..8}
-			do
-				$(pwd)/bin/climb_test cauchy_good $k $m $w 0
-			done
-		done
-	done
+	$(pwd)/bin/sa_test cauchy_good 5 4 8 0
 done
