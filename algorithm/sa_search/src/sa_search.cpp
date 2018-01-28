@@ -281,7 +281,7 @@ bool sa_judge_in_failed_disk_selection(int k,int m,int w,int failed_disk_id,int*
 }
 
 void sa_search_recovery_solution(int k,int m,int w,int failed_disk_id,int *generator_matrix) {
-	double K = 0.97, T= k*m*w*w, M = k*m*w*w, L = k*m*w*w;
+	double K = 0.97, T= k*m*m*w*w, M = k*m*w*w, L = k*m*w*w;
 	double ini = M;
 	double remain_times = ini;
 	double random_probability = 0;
@@ -418,7 +418,6 @@ int* calculate_recovery_index(int k,int m,int w, int failed_disk_id,int* generat
 }
 
 int* sa_crs_hybrid_recovery_solution(int k, int m, int w, int failed_disk_id, int *generator_matrix) {
-	//cout << "Start initialization: " << endl;
 	init_crs_recovery_equation_group(k,m,w,failed_disk_id,generator_matrix);
 	init_crs_hybrid_parity_group_selection(k, m, w, failed_disk_id,generator_matrix);
 	init_crs_hybrid_parity_group_selection_best(k,m,w,generator_matrix);
