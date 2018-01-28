@@ -82,7 +82,7 @@ int WriteResult(int conventional_symbol_number, int optimized_symbol_number, int
 	stream_failed_disk_id_str << failed_disk_id;
 	stream_failed_disk_id_str >> failed_disk_id_str;
 	stream_failed_disk_id_str.clear();
-
+	
 	switch(tech){
 		case Cauchy_Orig:
 			{
@@ -154,7 +154,7 @@ int WriteResult(int conventional_symbol_number, int optimized_symbol_number, int
 	stream_time << cost;
 	stream_time >> time;
 	stream_time.clear();
-	string buf = conventional_symbol_number_str + ",                            " + optimized_symbol_number_str +",                       " + reduced_symbol_number_str + ",                       " + time;
+	string buf = conventional_symbol_number_str + ",                            " + optimized_symbol_number_str +",                       " + reduced_symbol_number_str + ",                       " + time + "\n";
 	write(fd, buf.c_str(), buf.size());
 	if(fd != -1)
 		close(fd);
