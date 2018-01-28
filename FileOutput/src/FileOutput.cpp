@@ -4,7 +4,7 @@
 #include<stdlib.h>
 #include<unistd.h>
 #include<time.h>
-#include<string.h>
+#include<string>
 #include<fstream>
 #include<fcntl.h>
 #include <sys/types.h> 
@@ -29,104 +29,134 @@ string getElemTypeName(enum Coding_Technique tech){
 	}
 }
 
-void InitOutputFile(const char* path, string kk, string mm, string ww, string failed_node_id, enum Coding_Technique tech, string algorithm){
-	FILE* fp;
-	time_t Now;
-	int fd;
+void InitOutputFile(const char* path, string k, string m, string w, string failed_disk_id, enum Coding_Technique tech, string algorithm){
+	int fd = -1;
 	// now time
+
+	time_t Now;
 	Now = time(&Now);
+
 	if(access(path, F_OK) == -1){
-		fp = fopen(path, "a+");
-		if(fp == NULL){
-			fprintf(stderr, "Unable to open file.\n");
+		fd = open(path, O_RDWR | O_CREAT, 0664);
+		if (fd == -1) {
+			fprintf(stderr,  "Unable to open file.\n");
 			exit(0);
 		}
-		fseek(fp, 0, SEEK_SET);
-		fprintf(fp, "COMMENT : The search result by %s for %s %s\n", algorithm.c_str(), getElemTypeName(tech).c_str(), ctime(&Now));
-		fprintf(fp, "tech : %s\n", getElemTypeName(tech).c_str());
-		fprintf(fp, "algorithm : %s\n", algorithm.c_str());
-		fprintf(fp, "k : %s\n", kk.c_str());
-		fprintf(fp, "m : %s\n", mm.c_str());
-		fprintf(fp, "w : %s\n", ww.c_str());
-		fprintf(fp, "failed_disk_id : %s\n", failed_node_id.c_str());
-		fprintf(fp, "conventional_symbol_number    optimized_symbol_number    reduced_symbol_number    time\n");
-		fclose(fp);
+		string base = "COMMENT : The search result by ";
+		string buf = base + algorithm + " for " + getElemTypeName(tech) +" "+ ctime(&Now) +"\n";
+		buf += "tech : " + getElemTypeName(tech) + "\n";
+		buf += "algorithm : " + algorithm + "\n";
+		buf += "k : " + k + "\n";
+		buf += "m : " + m + "\n";
+		buf += "w : " + w + "\n";
+		buf += "failed_disk_id : "+ failed_disk_id+"\n";
+		buf += "conventional_symbol_number    optimized_symbol_number    reduced_symbol_number    time\n";		
+
+		write(fd, buf.c_str(), buf.size());
+		if(fd != -1)
+			close(fd);
 	}
 }
 
 int WriteResult(int conventional_symbol_number, int optimized_symbol_number, int reduced_symbol_number, int k, int m, int w, int failed_disk_id, enum Coding_Technique tech, string algorithm, double cost){
-	FILE* fp;
+	int fd = -1;	
 	const char* path;
-	int fd;	
 	time_t Now;
 	Now = time(&Now);
 	//int to string
-	stringstream kk,mm,ww,failed_node_id;
-	kk<<k;
-	mm<<m;
-	ww<<w;
-	failed_node_id<<failed_disk_id;
+	stringstream stream_k, stream_m, stream_w, stream_failed_disk_id_str;
+	string k_str, m_str, w_str, failed_disk_id_str;
+	
+	stream_k << k;
+	stream_k >> k_str;
+	stream_k.clear();
+
+	stream_m << m;
+	stream_m >> m_str;
+	stream_m.clear();
+
+	stream_w << w;
+	stream_w >> w_str;
+	stream_w.clear();
+
+	stream_failed_disk_id_str << failed_disk_id;
+	stream_failed_disk_id_str >> failed_disk_id_str;
+	stream_failed_disk_id_str.clear();
 
 	switch(tech){
 		case Cauchy_Orig:
 			{
-				string base = "./Result/";
-				base += algorithm + "/Cauchy_Orig-" + kk.str() + "-" + mm.str() + "-" + ww.str() + "-" + failed_node_id.str();
+				string base = "../Result/";
+				base += algorithm + "/Cauchy_Orig-" + k_str + "-" + m_str + "-" + w_str + "-" + failed_disk_id_str;
 				path = base.c_str();
-				InitOutputFile(path, kk.str(), mm.str(), ww.str(), failed_node_id.str(), tech, algorithm);
-				fp = fopen(path, "a+");
+				InitOutputFile(path, k_str, m_str, w_str, failed_disk_id_str, tech, algorithm);
+				fd = open(path, O_RDWR | O_APPEND);
 				break;
 			}
 		case Cauchy_Good:
 			{
-				string base = "./Result/";
-				base += algorithm + "/Cauchy_Good-" + kk.str() + "-" + mm.str() + "-" + ww.str() + "-" + failed_node_id.str();
+				string base = "../Result/";
+				base += algorithm + "/Cauchy_Good-" + k_str + "-" + m_str + "-" + w_str + "-" + failed_disk_id_str;
 				path = base.c_str();
-				InitOutputFile(path, kk.str(), mm.str(), ww.str(), failed_node_id.str(), tech, algorithm);
-				fp = fopen(path, "a+");
+				InitOutputFile(path, k_str, m_str, w_str, failed_disk_id_str, tech, algorithm);
+				fd = open(path, O_RDWR | O_APPEND);
 				break;
 			}
 		case Liberation:
 			{
-				string base = "./Result/";
-				base += algorithm + "/Liberation-" + kk.str() + "-" + mm.str() + "-" + ww.str() + "-" + failed_node_id.str();
+				string base = "../Result/";
+				base += algorithm + "/Liberation-" + k_str + "-" + m_str + "-" + w_str + "-" + failed_disk_id_str;
 				path = base.c_str();
-				InitOutputFile(path, kk.str(), mm.str(), ww.str(), failed_node_id.str(), tech, algorithm);
-				fp = fopen(path, "a+");
+				InitOutputFile(path, k_str, m_str, w_str, failed_disk_id_str, tech, algorithm);
+				fd = open(path, O_RDWR | O_APPEND);
 				break;
 			}
 		case Blaum_Roth:
 			{
-				string base = "./Result/";
-				base += algorithm + "/Blaum_Roth-" + kk.str() + "-" + mm.str() + "-" + ww.str() + "-" + failed_node_id.str();
+				string base = "../Result/";
+				base += algorithm + "/Blaum_Roth-" + k_str + "-" + m_str + "-" + w_str + "-" + failed_disk_id_str;
 				path = base.c_str();
-				InitOutputFile(path, kk.str(), mm.str(), ww.str(), failed_node_id.str(), tech, algorithm);
-				fp = fopen(path, "a+");
+				InitOutputFile(path, k_str, m_str, w_str, failed_disk_id_str, tech, algorithm);
+				fd = open(path, O_RDWR | O_APPEND);
 				break;
 			}
 		case Liber8tion:
 			{
-				string base = "./Result/";
-				base += algorithm + "/Liber8tion-" + kk.str() + "-" + mm.str() + "-" + ww.str() + "-" + failed_node_id.str();
+				string base = "../Result/";
+				base += algorithm + "/Liber8tion-" + k_str + "-" + m_str + "-" + w_str + "-" + failed_disk_id_str;
 				path = base.c_str();
-				InitOutputFile(path, kk.str(), mm.str(), ww.str(), failed_node_id.str(), tech, algorithm);
-				fp = fopen(path, "a+");
+				InitOutputFile(path, k_str, m_str, w_str, failed_disk_id_str, tech, algorithm);
+				fd = open(path, O_RDWR | O_APPEND);
 				break;
 			}
 	}
-	if (fp == NULL) {
+	if (fd == -1) {
 		fprintf(stderr,  "Unable to open file.\n");
 		exit(0);
 	}
-	fseek(fp, 0, SEEK_CUR);
-
 	//int to string
-	stringstream conventional_symbol_numbers, optimized_symbol_numbers, reduced_symbol_numbers, time;
-	conventional_symbol_numbers << conventional_symbol_number;
-	optimized_symbol_numbers << optimized_symbol_number;
-	reduced_symbol_numbers << reduced_symbol_number;
-	time<<cost;
 
-	fprintf(fp, "%s,                            %s,                       %s,                       %s\n", conventional_symbol_numbers.str().c_str(), optimized_symbol_numbers.str().c_str(), reduced_symbol_numbers.str().c_str(), time.str().c_str());
+	stringstream stream_conventional_symbol_number, stream_optimized_symbol_number, stream_reduced_symbol_number, stream_time;
+	string conventional_symbol_number_str, optimized_symbol_number_str, reduced_symbol_number_str, time;
+		
+	stream_conventional_symbol_number << conventional_symbol_number;
+	stream_conventional_symbol_number >> conventional_symbol_number_str;
+	stream_conventional_symbol_number.clear();
+	
+	stream_optimized_symbol_number << optimized_symbol_number;
+	stream_optimized_symbol_number >> optimized_symbol_number_str;
+	stream_optimized_symbol_number.clear();
+
+	stream_reduced_symbol_number << reduced_symbol_number;
+	stream_reduced_symbol_number >> reduced_symbol_number_str;	
+	stream_reduced_symbol_number.clear();
+
+	stream_time << cost;
+	stream_time >> time;
+	stream_time.clear();
+	string buf = conventional_symbol_number_str + ",                            " + optimized_symbol_number_str +",                       " + reduced_symbol_number_str + ",                       " + time;
+	write(fd, buf.c_str(), buf.size());
+	if(fd != -1)
+		close(fd);
 	return 0;
 }
