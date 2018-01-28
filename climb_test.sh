@@ -3,8 +3,6 @@
 
 echo In this experiment, we will test the replacement recovery algorithm:
 
-code_types=("Cauchy_Orig" "Cauchy_Good" "Liberation" "Blaum_Roth" "Liber8tion")
-
 for i in {1..300}
 do
 	$(pwd)/bin/climb_test liber8tion 2 2 8 0
