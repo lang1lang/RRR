@@ -1,0 +1,10 @@
+COMMENT : The search result by Enumeration for Cauchy_Good Fri Jan 26 21:38:48 2018
+
+tech : Cauchy_Good
+algorithm : Enumeration
+k : 3
+m : 2
+w : 4
+failed_disk_id : 0
+conventional_symbol_number    optimized_symbol_number    reduced_symbol_number    time
+12,                            9,                       7,                       96.14

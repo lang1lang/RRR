@@ -1,0 +1,29 @@
+COMMENT : The search result by Simulated-Annealing for Cauchy_Good Sat Jan 27 10:18:28 2018
+
+tech : Cauchy_Good
+algorithm : Simulated-Annealing
+k : 8
+m : 4
+w : 10
+failed_disk_id : 0
+conventional_symbol_number    optimized_symbol_number    reduced_symbol_number    time
+80,                            67,                       13,                       6.43
+80,                            63,                       17,                       12.5
+80,                            63,                       17,                       12.33
+80,                            65,                       15,                       12.98
+80,                            63,                       17,                       12.58
+80,                            63,                       17,                       12.4
+80,                            63,                       17,                       12.67
+80,                            65,                       15,                       13.12
+80,                            65,                       15,                       12.95
+80,                            65,                       15,                       12.2
+80,                            65,                       15,                       12.72
+80,                            65,                       15,                       12.22
+80,                            65,                       15,                       12.72
+80,                            67,                       13,                       13.02
+80,                            63,                       17,                       12.33
+80,                            65,                       15,                       12.38
+80,                            63,                       17,                       12.51
+80,                            63,                       17,                       12.27
+80,                            65,                       15,                       12.81
+80,                            63,                       17,                       12.62
