@@ -274,8 +274,8 @@ bool sa_judge_in_failed_disk_selection(int k,int m,int w,int failed_disk_id,int*
 		}
 	}
 	delete[] temp_array;
-	delete[] temp_sum;
-	delete[] binaryArray;
+	//delete[] temp_sum;
+	//delete[] binaryArray;
 	sa_crs_hybrid_parity_group_selection_temporary[sa_crs_hybrid_parity_group_selection_temporary_index[group_id]] = 1;
 	return false;
 }
