@@ -86,7 +86,7 @@ int WriteResult(int conventional_symbol_number, int optimized_symbol_number, int
 	switch(tech){
 		case Cauchy_Orig:
 			{
-				string base = "../Result/";
+				string base = "./Result/";
 				base += algorithm + "/Cauchy_Orig-" + k_str + "-" + m_str + "-" + w_str + "-" + failed_disk_id_str;
 				path = base.c_str();
 				InitOutputFile(path, k_str, m_str, w_str, failed_disk_id_str, tech, algorithm);
@@ -95,7 +95,7 @@ int WriteResult(int conventional_symbol_number, int optimized_symbol_number, int
 			}
 		case Cauchy_Good:
 			{
-				string base = "../Result/";
+				string base = "./Result/";
 				base += algorithm + "/Cauchy_Good-" + k_str + "-" + m_str + "-" + w_str + "-" + failed_disk_id_str;
 				path = base.c_str();
 				InitOutputFile(path, k_str, m_str, w_str, failed_disk_id_str, tech, algorithm);
@@ -104,7 +104,7 @@ int WriteResult(int conventional_symbol_number, int optimized_symbol_number, int
 			}
 		case Liberation:
 			{
-				string base = "../Result/";
+				string base = "./Result/";
 				base += algorithm + "/Liberation-" + k_str + "-" + m_str + "-" + w_str + "-" + failed_disk_id_str;
 				path = base.c_str();
 				InitOutputFile(path, k_str, m_str, w_str, failed_disk_id_str, tech, algorithm);
@@ -113,7 +113,7 @@ int WriteResult(int conventional_symbol_number, int optimized_symbol_number, int
 			}
 		case Blaum_Roth:
 			{
-				string base = "../Result/";
+				string base = "./Result/";
 				base += algorithm + "/Blaum_Roth-" + k_str + "-" + m_str + "-" + w_str + "-" + failed_disk_id_str;
 				path = base.c_str();
 				InitOutputFile(path, k_str, m_str, w_str, failed_disk_id_str, tech, algorithm);
@@ -122,7 +122,7 @@ int WriteResult(int conventional_symbol_number, int optimized_symbol_number, int
 			}
 		case Liber8tion:
 			{
-				string base = "../Result/";
+				string base = "./Result/";
 				base += algorithm + "/Liber8tion-" + k_str + "-" + m_str + "-" + w_str + "-" + failed_disk_id_str;
 				path = base.c_str();
 				InitOutputFile(path, k_str, m_str, w_str, failed_disk_id_str, tech, algorithm);
