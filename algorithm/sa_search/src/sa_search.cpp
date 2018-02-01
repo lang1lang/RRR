@@ -281,7 +281,7 @@ bool sa_judge_in_failed_disk_selection(int k,int m,int w,int failed_disk_id,int*
 }
 
 void sa_search_recovery_solution(int k,int m,int w,int failed_disk_id,int *generator_matrix) {
-	double K = 0.97, T= k*m*m*w*w, M = k*m*w*w, L = k*m*w*w;
+	double K = 0.97, T= k*m*m*w*w, M = k*m*m*w*w, L = k*m*m*w*w;
 	double ini = M;
 	double remain_times = ini;
 	double random_probability = 0;

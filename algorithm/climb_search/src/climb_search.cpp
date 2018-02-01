@@ -94,7 +94,7 @@ void int2bin(int integer, int *binary, int array_len) {
     while (k >= 0) {
         binary[n++] = temp[--k];
     }
-    delete[] temp; 
+    //delete[] temp; 
 }
 
 //Judging linear correlation
@@ -123,7 +123,6 @@ int not_in_failed_disk_selection(int m, int k, int w, int failed_disk_id, int *g
     }//temp_array saves: the index of 1 in crs_hybrid_parity_group_selection, which represents which parity symbol participates in reconstruction
     search_scale=1<<source_num; //Be equal to 2^source_num,When source_num is equal to 2, search_scale is equal to 4
     //cout << "search_scale=  " << search_scale << "   source_num=  " << source_num <<"  row=  "<< row << endl;
-    /*system("pause");*/
     int* binaryArray=new int[source_num];
     int* temp_sum = new int[w];
     for (i=0;i<search_scale;i++) {       //i = 0 1 2 3
@@ -155,9 +154,9 @@ int not_in_failed_disk_selection(int m, int k, int w, int failed_disk_id, int *g
             return 0;
         }
     }
-    delete[] temp_array;
-    delete[] temp_sum;
-    delete[] binaryArray;
+    //delete[] temp_array;
+    //delete[] temp_sum;
+    //delete[] binaryArray;
     return 1;
 }
 
@@ -267,7 +266,7 @@ void crs_adjust_recovery_vector_in_adjustment(int m, int k, int w, int failed_di
 	else {
 		//printf("before adjust is %d and after adjust is %d\n", tmp_crs_hybrid_profit, crs_hybrid_profit);
 	}
-	delete[] tmp_crs_failed_disk_selection;
+	//delete[] tmp_crs_failed_disk_selection;
 }
 
 void crs_adjust_recovery_vector(int m, int k, int w, int failed_disk_id, int fixed_parity_disk, int star_parity_disk, int *generator_matrix) {
@@ -317,8 +316,8 @@ void crs_adjust_recovery_vector(int m, int k, int w, int failed_disk_id, int fix
 			crs_hybrid_parity_group_selection[i] = tmp_crs_failed_disk_selection[i];
 		}
 	}
-	delete[] tmp_crs_failed_disk_selection;
-	delete[] candidate_replace_parity_groups;
+	//delete[] tmp_crs_failed_disk_selection;
+	//delete[] candidate_replace_parity_groups;
 	//printf("Adjustment profit is %d\n", (tmp_crs_hybrid_profit - crs_hybrid_profit));
 }
 
@@ -344,6 +343,7 @@ int* crs_hybrid_recovery_solution(int m, int k, int w, int failed_disk_id,int *g
 	for (int i=0;i<(m*w);i++) {
         	crs_hybrid_parity_group_selection[i]=0;
         	candidate_replace_parity_groups[i]=0;
+		crs_final_recovery_parity_vector[i]=0;
     	}//Initialization is all unselected
 
 	int *optimal_conventional_recovery=new int[m];//The best traditional method
@@ -385,10 +385,10 @@ int* crs_hybrid_recovery_solution(int m, int k, int w, int failed_disk_id,int *g
 			crs_store_selection_to_final(m, w);
 		}
 	}
-	delete[] candidate_replace_parity_groups;
-	delete[] crs_hybrid_parity_group_selection;
-	delete[] optimal_conventional_recovery;
-	delete[] rows_intersection_infor;
+	//delete[] candidate_replace_parity_groups;
+	//delete[] crs_hybrid_parity_group_selection;
+	//delete[] optimal_conventional_recovery;
+	//delete[] rows_intersection_infor;
 	return crs_final_recovery_parity_vector;
 }
 
@@ -477,13 +477,13 @@ void print_crs_solution(int k,int m,int w ,map<int, vector<int> > crs_solution) 
 	}
 	cout << endl;
 }
-int calculate_block_saving(int k, int m, int w, int failed_disk_id, int *generator_matrix, int* sa_crs_hybrid_parity_group_selection) {
-	int blocks_savings = 0;
+int calculate_block_saving(int k, int m, int w, int failed_disk_id, int *generator_matrix, int* crs_hybrid_parity_group_selection) {
+	int blocks_savings = 0;//reprensents the symbol numbers
 	for (int i = 0; i<k*w; i++) {
 		if ((i / w) != failed_disk_id) {
 			int tmp_saving = 1;
 			for (int j = 0; j < m*w; j++) {
-				if (sa_crs_hybrid_parity_group_selection[j] == 1) {
+				if (crs_hybrid_parity_group_selection[j] == 1) {
 					//This parity symbol is selected to participate in reconstruction
 					if (generator_matrix[j*k*w + i] == 1) {
 						tmp_saving = 0;
